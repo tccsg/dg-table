@@ -1,7 +1,7 @@
 # dg-table
 
 #### 项目介绍
-基于element ui table二次开发的多功能实现远程筛选的表格
+基于element ui table二次开发的多功能实现远程筛选的表格,目前处于代码整理的阶段
 <br>
 <br>
 提供的筛选器：
@@ -15,21 +15,7 @@
 <br>
 提供分页，多选，自定义列等配置项
 
-#### 安装教程
+#### 部分截图
 
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
-
-#### 参与贡献
-
-1. Fork 本项目
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+> 从服务器拉取匹配项列表
+> > ![从服务器拉取匹配项列表](/src/assets/images/screenshot/1.png)
