@@ -34,3 +34,9 @@
 
 > 范围筛选
 > > ![范围筛选](/src/assets/images/screenshot/5.png)
+
+> 筛选项
+> > ![筛选项](/src/assets/images/screenshot/7.png)
+
+> 分页
+> > ![分页](/src/assets/images/screenshot/8.png)
