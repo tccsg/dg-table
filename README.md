@@ -19,3 +19,18 @@
 
 > 从服务器拉取匹配项列表
 > > ![从服务器拉取匹配项列表](/src/assets/images/screenshot/1.png)
+
+> 单纯的文本搜索
+> > ![单纯的文本搜索](/src/assets/images/screenshot/4.png)
+
+> 提供单选的列表
+> > ![提供单选的列表](/src/assets/images/screenshot/3.png)
+
+> 日期筛选
+> > ![日期筛选](/src/assets/images/screenshot/2.png)
+
+> 联级选择器
+> > ![联级选择器](/src/assets/images/screenshot/5.png)
+
+> 范围筛选
+> > ![范围筛选](/src/assets/images/screenshot/5.png)
