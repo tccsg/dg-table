@@ -30,7 +30,7 @@
 > > ![日期筛选](/src/assets/images/screenshot/2.png)
 
 > 联级选择器
-> > ![联级选择器](/src/assets/images/screenshot/5.png)
+> > ![联级选择器](/src/assets/images/screenshot/6.png)
 
 > 范围筛选
 > > ![范围筛选](/src/assets/images/screenshot/5.png)
