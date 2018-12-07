@@ -1,7 +1,7 @@
 # dg-table
 
 #### 项目介绍
-基于element ui table二次开发的多功能实现远程筛选的表格,目前处于代码整理的阶段
+基于element ui table二次开发的多功能实现远程筛选的表格
 <br>
 <br>
 提供的筛选器：
@@ -17,26 +17,26 @@
 
 #### 部分截图
 
-> 从服务器拉取匹配项列表
-> > ![从服务器拉取匹配项列表](/src/assets/images/screenshot/1.png)
+> 初始状态
+> > ![初始状态](/images/dt1.png)
 
-> 单纯的文本搜索
-> > ![单纯的文本搜索](/src/assets/images/screenshot/4.png)
+> 从服务器拉取匹配项列表
+> > ![从服务器拉取匹配项列表](/images/dtsearch.png)
 
 > 提供单选的列表
-> > ![提供单选的列表](/src/assets/images/screenshot/3.png)
-
-> 日期筛选
-> > ![日期筛选](/src/assets/images/screenshot/2.png)
+> > ![提供单选的列表](/images/dtradio.png)
 
 > 联级选择器
-> > ![联级选择器](/src/assets/images/screenshot/6.png)
+> > ![联级选择器](/images/dtcascader.png)
+
+> 日期筛选
+> > ![日期筛选](/images/dtdate.png)
+
+> 单纯的文本搜索
+> > ![单纯的文本搜索](/images/dtedit.png)
 
 > 范围筛选
-> > ![范围筛选](/src/assets/images/screenshot/5.png)
+> > ![范围筛选](/images/range.png)
 
-> 筛选项
-> > ![筛选项](/src/assets/images/screenshot/7.png)
-
-> 分页
-> > ![分页](/src/assets/images/screenshot/8.png)
+> 最终状态
+> > ![最终状态](/images/dt2.png)

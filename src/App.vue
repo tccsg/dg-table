@@ -25,15 +25,26 @@ export default {
           filterbar: true,
           pagination: true,
           pagenum: 1,
-          curpage: 1
+          curpage: 1,
+          filters: {
+            uid: {
+              label: '天才',
+              key: 'uid',
+              value: 'uid_x89dj9vecx',
+              fn: '姓名'
+            }
+          }
         },
         columConfig: { // 列的配置信息 包括每列的数据展示方式 和单击行为 单击返回当前行的数据信息
           onclick: (row) => {
             console.log('onclick colum :', row)
           },
           activeConfig: {
-            type: 'customize',
-            component: cc,
+            type: 'button',
+            label: '获取',
+            handler: (scope) => {
+              alert(JSON.stringify(scope.row))
+            },
             width: '100'
           },
           config: [
@@ -305,6 +316,7 @@ export default {
             }, {
               prop: 'range',
               label: '范围',
+              width: '70',
               filterConfig: {
                 fn: '范围',
                 type: 'range',

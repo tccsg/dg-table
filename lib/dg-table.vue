@@ -109,7 +109,7 @@
           <template slot-scope="scope">
             <el-button
               size="mini"
-              @click="tableInfo.columConfig.activeConfig.handler(scope)">{{tableInfo.columConfig.activeConfig.label}}</el-button>
+              @click.stop="tableInfo.columConfig.activeConfig.handler(scope)">{{tableInfo.columConfig.activeConfig.label}}</el-button>
           </template>
         </el-table-column>
         <!-- 文字按键 -->
@@ -118,7 +118,7 @@
           v-if="tableInfo.columConfig.activeConfig.type === 'textbtn'"
           label="操作">
           <template slot-scope="scope">
-            <span @click="tableInfo.columConfig.activeConfig.handler(scope)" style="cursor:pointer;color: #ff0000;">{{tableInfo.columConfig.activeConfig.label}}</span>
+            <span @click.stop="tableInfo.columConfig.activeConfig.handler(scope)" style="cursor:pointer;color: #ff0000;">{{tableInfo.columConfig.activeConfig.label}}</span>
           </template>
         </el-table-column>
         <!-- 自定义操作区域 -->
@@ -434,6 +434,18 @@ export default {
         this.$set(_filterAction, _curFilter, false)
         this.filterAction = _filterAction
       }
+    },
+    // 用于初始化 filters bar
+    initFilterBar () {
+      let initfilters = this.tableInfo.toolsConfig.filters
+      if (typeof initfilters === 'object' && typeof initfilters.length !== 'number') {
+        let tags = []
+        initFilterData(initfilters)
+        for (let k in initfilters) {
+          tags.push(initfilters[k])
+        }
+        this.bardata = tags
+      }
     }
   },
   directives: {
@@ -457,6 +469,7 @@ export default {
     }
   },
   mounted: function () {
+    this.initFilterBar()
     window.onresize = () => {
       setTimeout(() => {
         if (_filterbar) this.filterPosition(_filterbar, _curFilter)

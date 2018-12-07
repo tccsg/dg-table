@@ -86,7 +86,7 @@ export default {
         type: 'date',
         key: this.filterkey,
         label: val[0] + ' , ' + val[1],
-        value: 'date',
+        value: { gt: val[0], lt: val[1] },
         fn: this.fn,
         date: { gt: val[0], lt: val[1] }
       })
