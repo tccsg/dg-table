@@ -36,7 +36,7 @@
 > > ![单纯的文本搜索](/images/dtedit.png)
 
 > 范围筛选
-> > ![范围筛选](/images/range.png)
+> > ![范围筛选](/images/dtrange.png)
 
 > 最终状态
 > > ![最终状态](/images/dt2.png)
