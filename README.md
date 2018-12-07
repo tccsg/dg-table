@@ -181,4 +181,4 @@ dgTable = {
 #### 表格属性
 参数      | 说明 | 类型 | 可选值 | 默认值
 ----     |---- |----- |----- |------
-tableInfo | 表格配置文件列配置，数据，工具配置 | object | - | -
+tableInfo | 表格配置文件列配置，数据，工具配置，toolsConfig属性用于配置工具，columConfig用于配置列包括行为，data为表格数据 | object | - | -
