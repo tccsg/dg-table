@@ -55,46 +55,46 @@ npm i dg-table
 <dg-table></dg-table>
 ```
 ```javascript
-dgTable: {
-  toolsConfig: { // 用于配置功能选项 包括 多选，筛选条，分页 默认都为true
-    select: true,
-    filterbar: true,
-    pagination: true,
-    pagenum: 1,
-    curpage: 1
+dgTable = {
+  toolsConfig: { // 用于配置功能选项 包括 多选，筛选条，分页
+    select: true, // 是否开启多选列
+    filterbar: true, // 是否显示筛选条件
+    pagination: true, // 是否提供翻页功能
+    pagenum: 1, // 翻页的页数
+    curpage: 1 // 当前页码
   },
   columConfig: { // 列的配置信息 包括每列的数据展示方式 和单击行为 单击返回当前行的数据信息
-    onclick: (row) => {
+    onclick: (row) => { // 行的单击事件 返回当前行
       alert(JSON.stringify(row))
     },
-    activeConfig: {
-      type: 'button',
-      label: '获取',
-      handler: (scope) => {
+    activeConfig: { // 最后的操作列 提供 默认提供文字和按钮的操作列
+      type: 'button', // 默认有button 和 textbtn 还提供自定义操作样式
+      label: '获取', // 按钮或者文字要显示的内容
+      handler: (scope) => { // 回调
         alert(JSON.stringify(scope.row))
       },
       width: '100'
     },
-    config: [
+    config: [ // 每列配置
       {
-        prop: 'name',
-        label: '姓名',
-        width: '80',
-        filterConfig: {
-          fn: '姓名',
-          type: 'search',
-          key: 'uid',
-          placeholder: '输入姓名',
-          listinfo: {
-            handler: searchdata,
+        prop: 'name', // 要显示内容的key
+        label: '姓名', // 表头显示文案
+        width: '80', // 列的宽度
+        filterConfig: { // 筛选器配置
+          fn: '姓名', // 用于在已筛选条件的tag 类型文案显示
+          type: 'search', // 使用的筛选器类型
+          key: 'uid', // 数据返回的时候 该值所对应的key
+          placeholder: '输入姓名', // 设置默认提示内容
+          listinfo: { // 搜索列表内容配置
+            handler: searchdata, // 对应的搜索api
             searchkey: 'name', // 用于搜索api对应的key
-            showkey: 'name' // 在列表中要显示的字段
+            showkey: 'name' // 在列表中要显示的字段的key
           }
         }
       }, {
         prop: 'gender',
         label: '性别',
-        component: cc,
+        component: cc, // 自定义列
         width: '80',
         filterConfig: {
           fn: '性别',
@@ -102,9 +102,10 @@ dgTable: {
           key: 'gender',
           listinfo: {
             // handler: radiodata,
-            labelkey: 'label', // 用于搜索api对应的key
-            valuekey: 'value', // 在列表中要显示的字段
-            payload: null
+            // [{label: '男', value: '1'}]
+            labelkey: 'label',
+            valuekey: 'value',
+            payload: null // 保留属性
           },
           items: [
             { label: '男', value: 1 },
@@ -114,7 +115,7 @@ dgTable: {
       }, {
         prop: 'birthPlace',
         label: '出生地',
-        processdata: (row, prop) => {
+        processdata: (row, prop) => { // 提供 自定义 数据处理函数
           // console.log('process data:', row) // 返回整行 便于 处理一些依赖其他列的数据
           var space = ''
           if (!row.birthPlace) return '-'
@@ -133,12 +134,12 @@ dgTable: {
           fn: '出生地',
           key: 'birthPlace',
           type: 'cascader',
-          props: {
+          props: { // 跟element cascader组件用法相似
             value: 'code',
             label: 'name',
             children: 'children'
           },
-          options: cities()
+          options: cities() // 数据
         }
       }, {
         prop: 'birthDay',
@@ -148,11 +149,11 @@ dgTable: {
           type: 'date',
           key: 'birthDay'
         },
-        processdata: 'time'
+        processdata: 'time' // 默认提供的时间数据处理函数 time 返回 YY—MM—DD 格式 time2 返回带有具体事件的数据
       }, {
         prop: 'phone',
         label: '手机号',
-        extra: { handler: () => {} },
+        extra: { handler: () => {} }, // 额外提供的数据
         filterConfig: {
           fn: '手机',
           type: 'edit',
@@ -165,7 +166,7 @@ dgTable: {
           fn: '年龄',
           type: 'range',
           key: 'age',
-          unit: '岁'
+          unit: '岁' // 显示的单位
         }
       }
     ]
