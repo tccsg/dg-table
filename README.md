@@ -3,6 +3,8 @@
 #### 项目介绍
 基于element ui table二次开发的多功能实现远程筛选的表格
 
+[demo地址](https://www.theputian.com)
+
 已经发布到npm上 通过
 ```
 npm i dg-table
@@ -46,3 +48,5 @@ npm i dg-table
 
 > 最终状态
 > > ![最终状态](/images/dt2.png)
+
+#### 配置文件说明
