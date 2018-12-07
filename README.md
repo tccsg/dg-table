@@ -3,7 +3,7 @@
 #### 项目介绍
 基于element ui table二次开发的多功能实现远程筛选的表格
 
-[demo地址](https://www.theputian.com)
+[demo地址](https://www.theputian.com/my-npm-module-test/dist/index.html)
 
 已经发布到npm上 通过
 ```
