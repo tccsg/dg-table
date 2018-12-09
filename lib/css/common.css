@@ -1,0 +1,38 @@
+.filterWrap {
+  min-width: 100px;
+  border: 1px solid #ebeef5;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin: 2px 0;
+  position: absolute;
+  z-index: 9;
+}
+.editFilter {
+  position: absolute;
+  width: 300px;
+}
+.filterWrap.hideBg {
+  opacity:0;
+  box-shadow:none;
+}
+/* .filterWrap .filterContainer {
+  padding: 10px;
+} */
+.filterWrap .filterBottom {
+  padding: 8px;
+  border-top: 1px solid #ebeef5;
+}
+.filterWrap .filterBottom button {
+  background: transparent;
+  border: none;
+  color: #606266;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0 3px;
+}
+.filterWrap .filterBottom button.is-disabled {
+  color: #c0c4cc;
+  cursor: not-allowed;
+}

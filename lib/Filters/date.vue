@@ -1,22 +1,20 @@
 <template>
-  <div class="filterWrap"  style="opacity:0;box-shadow:none;">
-    <div class="filterContainer" style="padding:0">
-      <el-date-picker
-        v-model="filterdate"
-        type="daterange"
-        align="right"
-        style="height:0;padding:0;top:-10px"
-        unlink-panels
-        :ref="refname"
-        @change="changeData"
-        range-separator=""
-        start-placeholder=""
-        end-placeholder=""
-        format="yyyy 年 MM 月 dd 日"
-        value-format="yyyy-MM-dd"
-        :picker-options="pickerOptions2">
-      </el-date-picker>
-    </div>
+  <div>
+    <el-date-picker
+      v-model="filterdate"
+      type="daterange"
+      align="right"
+      style="height:0;padding:0;top:-10px"
+      unlink-panels
+      :ref="refname"
+      @change="changeData"
+      range-separator=""
+      start-placeholder=""
+      end-placeholder=""
+      format="yyyy 年 MM 月 dd 日"
+      value-format="yyyy-MM-dd"
+      :picker-options="pickerOptions2">
+    </el-date-picker>
   </div>
 </template>
 
@@ -32,7 +30,7 @@ export default {
       type: String,
       default: ''
     },
-    fn: {
+    ftn: {
       type: String,
       default: ''
     }
@@ -74,7 +72,7 @@ export default {
     }
   },
   mounted () {
-    Bus.$on('openjobinterviewdate', refname => {
+    Bus.$on('OPEN_DGTABLE_DATE_FILTER', refname => {
       if (this.$refs[refname]) {
         if (this.refname === refname) this.$refs[refname].focus()
       }
@@ -87,7 +85,7 @@ export default {
         key: this.filterkey,
         label: val[0] + ' , ' + val[1],
         value: { gt: val[0], lt: val[1] },
-        fn: this.fn,
+        ftn: this.ftn,
         date: { gt: val[0], lt: val[1] }
       })
     }
@@ -96,34 +94,5 @@ export default {
 </script>
 
 <style scoped>
-.filterWrap {
-  min-width: 100px;
-  border: 1px solid #ebeef5;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 2px 0;
-  position: absolute;
-  z-index: 9;
-}
-.filterWrap .filterContainer {
-  padding: 10px;
-}
-.filterWrap .filterBottom {
-  padding: 8px;
-  border-top: 1px solid #ebeef5;
-}
-.filterWrap .filterBottom button {
-  background: transparent;
-  border: none;
-  color: #606266;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 0 3px;
-}
-.filterWrap .filterBottom button.is-disabled {
-  color: #c0c4cc;
-  cursor: not-allowed;
-}
+@import '../css/common.css';
 </style>

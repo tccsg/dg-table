@@ -1,6 +1,6 @@
 <template>
-  <div class="filterWrap" ref='searchfilter'>
-    <div class="filterContainer">
+  <div ref='searchfilter' style="padding:10px">
+    <div>
       <el-autocomplete
         popper-class="my-autocomplete"
         v-model="searchdata"
@@ -36,7 +36,7 @@ export default {
       type: String,
       default: '请输入内容'
     },
-    fn: {
+    ftn: {
       type: String,
       default: ''
     }
@@ -72,7 +72,7 @@ export default {
         key: this.filterkey,
         label: item[this.showkey],
         value: item[this.filterkey],
-        fn: this.fn
+        ftn: this.ftn
       })
     }
   },
@@ -83,6 +83,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../css/common.css';
 .my-autocomplete .li {
   line-height: normal;
     padding: 7px;
@@ -101,35 +102,5 @@ export default {
 }
 .my-autocomplete .li .highlighted .addr {
   color: #ddd;
-}
-.filterWrap {
-  min-width: 100px;
-  border: 1px solid #ebeef5;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 2px 0;
-  position: absolute;
-  z-index: 9;
-}
-.filterWrap .filterContainer {
-  padding: 10px;
-}
-.filterWrap .filterBottom {
-  padding: 8px;
-  border-top: 1px solid #ebeef5;
-}
-.filterWrap .filterBottom button {
-  background: transparent;
-  border: none;
-  color: #606266;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 0 3px;
-}
-.filterWrap .filterBottom button.is-disabled {
-  color: #c0c4cc;
-  cursor: not-allowed;
 }
 </style>

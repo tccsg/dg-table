@@ -1,16 +1,15 @@
 <template>
-  <div v-if="options" class="filterWrap" ref='cascaderfilter' style="opacity:0;box-shadow:none;">
-    <div class="filterContainer" style="padding:0">
-      <el-cascader
-        style="width:0;height:0;padding:0;top:-10px"
-        :options="data"
-        :ref="refname"
-        expand-trigger="hover"
-        v-model="selectedOptions"
-        @change="handleChange"
-        :props="myprops">
-      </el-cascader>
-    </div>
+  <div v-if="options"
+    ref='cascaderfilter'>
+    <el-cascader
+      style="width:0;height:0;padding:0;top:-10px"
+      :options="data"
+      :ref="refname"
+      expand-trigger="hover"
+      v-model="selectedOptions"
+      @change="handleChange"
+      :props="myprops">
+    </el-cascader>
   </div>
 </template>
 
@@ -18,11 +17,11 @@
 import Bus from '../js/Bus.js'
 export default {
   props: {
-    fn: {
+    ftn: {
       type: String,
       default: ''
     },
-    cdata: {
+    data: {
       type: Array,
       default: function () {
         return []
@@ -51,7 +50,6 @@ export default {
     return {
       selectedOptions: [],
       options: [],
-      data: [],
       cascaderVal: ''
     }
   },
@@ -60,7 +58,7 @@ export default {
       let label = this.getLabel(value, this.data)
       setTimeout(() => {
         this.$emit('getFilterBridge', {
-          fn: this.fn,
+          ftn: this.ftn,
           key: this.filterkey,
           label: label,
           value: value[value.length - 1],
@@ -86,10 +84,9 @@ export default {
     }
   },
   mounted () {
-    Bus.$on('openjobinterviewcascader', refname => {
+    Bus.$on('OPEN_DGTABLE_CASCADER_FILTER', refname => {
       if (this.options && this.refname === refname && this.$refs[refname]) {
         this.$refs[refname].handleClick()
-        this.data = this.cdata
       }
     })
   }
@@ -97,37 +94,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../css/common.css';
 .editFilter {
   position: absolute;
-}
-.filterWrap {
-  min-width: 100px;
-  border: 1px solid #ebeef5;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 2px 0;
-  position: absolute;
-  z-index: 9;
-}
-.filterWrap .filterContainer {
-  padding: 10px;
-}
-.filterWrap .filterBottom {
-  padding: 8px;
-  border-top: 1px solid #ebeef5;
-}
-.filterWrap .filterBottom button {
-  background: transparent;
-  border: none;
-  color: #606266;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 0 3px;
-}
-.filterWrap .filterBottom button.is-disabled {
-  color: #c0c4cc;
-  cursor: not-allowed;
 }
 </style>

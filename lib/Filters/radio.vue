@@ -1,22 +1,20 @@
 <template>
-  <div class="filterWrap">
-    <div class="filterContainer" :ref="refname">
-      <div
-        v-show="innerdata.length === 0"
-        class="radioitems"
-        v-for="(item, key, index) in data"
-        :key="index"
-        @click='checkchange(item)'>
-        {{item.label}}
-      </div>
-      <div
-        v-show="innerdata.length !== 0"
-        class="radioitems"
-        v-for="(item, key, index) in innerdata"
-        :key="index"
-        @click='checkchange(item)'>
-        {{item.label}}
-      </div>
+  <div class="radioWrap" :ref="refname">
+    <div
+      v-show="innerdata.length === 0"
+      class="radioitems"
+      v-for="(item, key, index) in data"
+      :key="index"
+      @click='checkchange(item)'>
+      {{item.label}}
+    </div>
+    <div
+      v-show="innerdata.length !== 0"
+      class="radioitems"
+      v-for="(item, key, index) in innerdata"
+      :key="index"
+      @click='checkchange(item)'>
+      {{item.label}}
     </div>
   </div>
 </template>
@@ -47,7 +45,7 @@ export default {
       type: String,
       default: ''
     },
-    fn: {
+    ftn: {
       type: String,
       default: ''
     }
@@ -70,7 +68,7 @@ export default {
         key: this.filterkey,
         label: value.label,
         value: value.value,
-        fn: this.fn
+        ftn: this.ftn
       })
     },
     loadData () {
@@ -91,7 +89,7 @@ export default {
     }
   },
   mounted () {
-    Bus.$on('loadradiodata', refname => {
+    Bus.$on('LOAD_DGTABLE_RADIO_DATA', refname => {
       if (this.listinfo) {
         if (this.refname === refname) {
           this.loadData()
@@ -103,43 +101,15 @@ export default {
 </script>
 
 <style scoped>
-.filterContainer .el-radio__label {
-  font-size: 12px !important;
-}
+@import '../css/common.css';
 .editFilter {
   position: absolute;
   width: 300px;
 }
-.filterWrap {
-  border: 1px solid #ebeef5;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-  margin: 2px 0;
-  position: absolute;
-  z-index: 9;
-}
-.filterWrap .filterContainer {
+.radioWrap{
   padding: 10px 0;
   max-height: 300px;
   overflow: scroll;
-}
-.filterWrap .filterBottom {
-  padding: 8px;
-  border-top: 1px solid #ebeef5;
-}
-.filterWrap .filterBottom button {
-  background: transparent;
-  border: none;
-  color: #606266;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 0 3px;
-}
-.filterWrap .filterBottom button.is-disabled {
-  color: #c0c4cc;
-  cursor: not-allowed;
 }
 .radioitems {
   padding: 8px 30px;
