@@ -109,7 +109,7 @@ export default {
 .radioWrap{
   padding: 10px 0;
   max-height: 300px;
-  overflow: scroll;
+  overflow-y: visible;
 }
 .radioitems {
   padding: 8px 30px;

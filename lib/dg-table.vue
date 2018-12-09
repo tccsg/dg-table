@@ -58,22 +58,27 @@
           :label="item.label"
           :key="index"
           :width="item.width">
-          <template v-if="item.filterConfig.type" slot="header" slot-scope="scope">
-            <!-- <component
-              :is="t_headre"
-              :item='item'
-              :f_id="doRegFilters(item.filterConfig.type, item)"
-              :headerClick='headerClick'>
-            </component> -->
-            <span
-              @click='headerClick'
-              class="customize_filter"
-              :id='`${item.filterConfig.type}_${item.prop}`'
-              style='cursor:pointer;display:inline-block'
-            >
-              <span style='padding-right:3px;'>{{item.label}}</span>
-              <i class='el-icon-caret-bottom' />
-            </span>
+          <template
+            slot="header"
+            slot-scope="scope">
+            <template v-if="item.filterConfig && item.filterConfig.type">
+              <span
+                @click='headerClick'
+                class="customize_filter"
+                :id='`${item.filterConfig.type}_${item.prop}`'
+                style='cursor:pointer;display:inline-block'
+              >
+                <span style='padding-right:3px;'>{{item.label}}</span>
+                <i class='el-icon-caret-bottom' />
+              </span>
+            </template>
+            <template v-else>
+              <span
+                class="customize_filter"
+                style='display:inline-block'>
+                <span style='padding-right:3px;'>{{item.label}}</span>
+              </span>
+            </template>
           </template>
           <template slot-scope="{ row }">
             <template v-if="!item.component">
@@ -135,16 +140,16 @@
         </el-table-column>
         <!-- 自定义操作区域 -->
         <el-table-column
-          v-if="actionCompoent && actionCompoent.component._isVue"
+          v-if="actionConfig.type === 'customize' && actionConfig.component"
           :width="actionConfig.width"
           :label="actionConfig.label ? actionConfig.label : '操作'">
           <template slot-scope="scope">
             <component
-              :is="actionCompoent.component"
+              :is="actionConfig.component"
               :row='scope.row'
               @commonHanlerBridge='commonHanlerBridge'
               @doactive='doactive'
-              :handlers="actionCompoent.handlers">
+              :handlers="actionConfig.handlers">
             </component>
           </template>
         </el-table-column>
