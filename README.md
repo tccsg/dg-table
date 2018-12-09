@@ -16,10 +16,10 @@
 配置项参考下面的表格
 
 #### dg-table编写的Demo
-[demo地址](https://www.theputian.com/my-npm-module-test/dist/index.html)
+[demo地址](https://www.theputian.com/demo-dg-table/dist/index.html)
 <br>
 demo也已经上传在gitee上
-[demo的gitee地址](https://gitee.com/tccsg/my-npm-module-test)
+[demo的gitee地址](https://gitee.com/tccsg/demo-dg-table)
 
 开发者可以通过npm安装
 ```
@@ -245,9 +245,9 @@ key | 筛选后返回的数据对象中对应该值的key | string | - | -
 ftn | 已经筛选的条件中项目名称（在tag开头显示的项目名称）| string | - | -
 placeholder | 文本框默认展示的文案，对带有文本框类型的筛选器比较有用，默认选择器中edit和search可用<br>自定义筛选器也可以通过props引用| string | - | 请输入内容
 listinfo | 在带有列表的筛选器中，可以设置数据来源函数(下个版本中优化)<br>默认选择器中search和radio用到该属性，当然开发者自定义的筛选器中可以自定义数据结构，说明如下表 | object| - | -
-itmes | 列表数据来源 在组件中对于的props为data | array | - | -
+items | 列表数据来源 在组件中对于的props为data | array | - | -
 props | 默认筛选器中针对 cascader 的配置，<br>用法和Elementui cascader的props属性一样,<br>自定义用户可以自行构造数据 | object | - | {value: 'value',label: 'label',children: 'children'}
-nuit | 针对默认选择器中range，单位的配置 | string | - | unit
+unit | 针对默认选择器中range，单位的配置 | string | - | unit
 component | 仅针对type为customize，用户自定义筛选器组件 | ._isVue | - | -
 hidebg | 自定义筛选器组件的容器的背景设置，默认显示有阴影的背景 | boolean | true/false | false
 customizedata | 自定义筛选器需要的数据内容没限制组件中通过props同名引用 | object | - | -
