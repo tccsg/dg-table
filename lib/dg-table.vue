@@ -469,9 +469,9 @@ export default {
     },
     handleSelectChange (val) {
       // 解决选择 页面重新渲染的问题
-      _regFilter = {}
-      _filterAction = {}
-      this.regfilters = _regFilter
+      // _regFilter = {}
+      // _filterAction = {}
+      // this.regfilters = _regFilter
       this.$emit('select-change', val)
     },
     filterPosition (filterbar, filtertag) {
