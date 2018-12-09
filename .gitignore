@@ -3,6 +3,7 @@ node_modules
 src
 public
 /dist
+# images
 
 # local env files
 .env.local

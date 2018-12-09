@@ -252,7 +252,7 @@ component | 仅针对type为customize，用户自定义筛选器组件 | ._isVue
 hidebg | 自定义筛选器组件的容器的背景设置，默认显示有阴影的背景 | boolean | true/false | false
 customizedata | 自定义筛选器需要的数据内容没限制组件中通过props同名引用 | object | - | -
 
-##### 针对search中filterConfig的listinfo说明(用法课参考demo)
+##### 针对search中filterConfig的listinfo说明(用法可参考demo)
 参数  | 说明 | 类型 | 可选值 | 默认值
 ----  |---- |----- |----- |------
 handler | 用于提供能获取到搜索到的数据列表的函数<br>返回值为一个promise的resolve对象<br>|function | - | -
