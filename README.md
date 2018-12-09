@@ -240,7 +240,7 @@ filterConfig | 对于的筛选器的配置，如果没有则表头不提供筛�
 ##### filterConfig说明
 参数  | 说明 | 类型 | 可选值 | 默认值
 ----  |---- |----- |----- |------
-type | 筛选器的类型 | string | cascader（联级选择器）<br>date（日期选择器）<br>edit（纯文本选择器）<br>radio（单项选择器）<br>range（范围选择器）<br>search（搜索选择器）<br>自定义类型的选择器 值除了以上六种 | -
+type | 筛选器的类型 | string | cascader<br>date<br>edit<br>radio<br>range<br>search<br>自定义类型的选择器<br>值除了以上六种 | -
 key | 筛选后返回的数据对象中对应该值的key | string | - | -
 ftn | 已经筛选的条件中项目名称（在tag开头显示的项目名称）| string | - | -
 placeholder | 文本框默认展示的文案，对带有文本框类型的筛选器比较有用，默认选择器中edit和search可用<br>自定义筛选器也可以通过props引用| string | - | 请输入内容
