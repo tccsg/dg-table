@@ -238,7 +238,6 @@ processdata | 提供数据处理的方式而非组件 <br>默认提供 日期处
 filterConfig | 对于的筛选器的配置，如果没有则表头不提供筛选，配置内容如下表 | object | - | -
 
 ##### filterConfig说明
-公共：
 参数  | 说明 | 类型 | 可选值 | 默认值
 ----  |---- |----- |----- |------
 type | 筛选器的类型 | string | cascader（联级选择器）<br>date（日期选择器）<br>edit（纯文本选择器）<br>radio（单项选择器）<br>range（范围选择器）<br>search（搜索选择器）<br>自定义类型的选择器 值除了以上六种 | -
