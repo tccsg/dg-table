@@ -211,7 +211,7 @@ data () {
 data | 要显示的数据| array | - | -
 selection | 是否显示多选框 | boolean | - | false
 pagination | 是否显示翻页栏 | boolean | - | true
-page-config | 翻页的配置数据，<br>仅在pagination为true有效<br>格式为{pagenum: 1, curpage: 1} <br>pagenum为总页数，curpage为当前页数 | obj | - | {pagenum: 1, curpage: 1}
+page-config | 翻页的配置数据，<br>仅在pagination为true有效<br>格式为{pagenum: 1, curpage: 1} <br>pagenum为总页数，curpage为当前页数 | object | - | {pagenum: 1, curpage: 1}
 row-click | 行单击事件所绑定的函数 | function | - | () => {}
 action-config | 操作列（设定为最后一列）<br>具体请查看action-config对象表格 | object | - | -
 column-config | 除了操作列其他数据列配置，<br>具体请查看column-config表格 | array | - | -
@@ -219,7 +219,7 @@ column-config | 除了操作列其他数据列配置，<br>具体请查看column
 ##### action-config说明
 参数      | 说明 | 类型 | 可选值 | 默认值
 ----     |---- |----- |----- |------
-type | 有三种类型<br>默认提供的有单个按钮（值为'button'）<br>文字操作（值为'textbtn'）<br>自定义操作对象（值为'customize'）|string | - | -
+type | 有三种类型<br>默认提供的有单个按钮（值为'button'）<br>文字操作（值为'textbtn'）<br>自定义操作对象（值为'customize'）|string | button/textbtn/customize | -
 label | 要操作对象上显示的文字 仅在非自定义操作对象时候可用| string | - | -
 handler | 操作对象绑定的函数 仅在非自定义操作对象时候可用 | handler | - | -
 width | 操作列的框度 | string |- | -
@@ -251,6 +251,13 @@ nuit | 针对默认选择器中range，单位的配置 | string | - | unit
 component | 仅针对type为customize，用户自定义筛选器组件 | ._isVue | - | -
 hidebg | 自定义筛选器组件的容器的背景设置，默认显示有阴影的背景 | boolean | true/false | false
 customizedata | 自定义筛选器需要的数据内容没限制组件中通过props同名引用 | object | - | -
+
+##### 针对search中filterConfig的listinfo说明(用法课参考demo)
+参数  | 说明 | 类型 | 可选值 | 默认值
+----  |---- |----- |----- |------
+handler | 用于提供能获取到搜索到的数据列表的函数<br>返回值为一个promise的resolve对象<br>|function | - | -
+searchkey | 用户传给获取数据列表的api参数中对象的key<br>例如{name: '陈某某'}中的name| string | - | -
+showkey | 用于在列表中要显示的字段名 | string| - |-
 
 #### 表格事件
 事件名      | 说明 | 参数 
