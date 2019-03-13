@@ -59,8 +59,7 @@
           :key="index"
           :width="item.width">
           <template
-            slot="header"
-            slot-scope="scope">
+            slot="header">
             <template v-if="item.filterConfig && item.filterConfig.type">
               <span
                 @click='headerClick'
@@ -236,6 +235,8 @@ var _filterAction = {}
 var _curFilter = ''
 var _filterbar = null
 var _regfilterarr = []
+
+// beta
 export default {
   name: 'dg-table',
   destroyed () {
@@ -247,6 +248,13 @@ export default {
     _filterAction = {}
     _curFilter = ''
     _filterbar = null
+  },
+  created () {
+    // console.log(this.$children)
+    // const attrs = this.$props.etAttributes
+    // for (let k in attrs) {
+    //   this.$children[0][k] = attrs[k]
+    // }
   },
   props: {
     data: {
@@ -267,6 +275,12 @@ export default {
       type: Object,
       default: function () {
         return { pagenum: 1, curpage: 1 }
+      }
+    },
+    etAttributes: {
+      type: Object,
+      default: function () {
+        return {}
       }
     },
     filterInit: Array,

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <dg-table
+    <!-- <dg-table
       :data='data'
       :selection="true"
       :pagination="true"
@@ -9,9 +9,12 @@
       :row-click="onclick"
       :action-config="activeConfig"
       :column-config="config"
+      :et-attributes="el_attributes"
       @filter-change='getFilter'
       @select-change="getselect"
-      @page-change="getpage"></dg-table>
+      @page-change="getpage"></dg-table> -->
+      <dgtag>lala</dgtag>
+      <component :is="etg">lala</component>
   </div>
 </template>
 
@@ -19,6 +22,7 @@
 // import DgTable from './lib/dg-table.vue'
 import cc from './components/columcomponent.vue'
 import CF from './components/customizefilter.vue'
+import Vue from 'vue'
 import {
   searchdata,
   dofilter,
@@ -55,12 +59,20 @@ export default {
     let res = createTableDataByRandom(587)
     this.data = res.data
     this.pagenum = res.pagenum
+
+    const Etag = Vue.component('ElTagtre')
+    // const etag = new Etag()
+    this.etg = Etag
     // tabledata().then(res => {
     //   this.dgTable.data = res
     // })
   },
   data () {
     return {
+      etg: null,
+      el_attributes: {
+        border: true
+      },
       filters: 3,
       // curpage: 1,
       select: true,
