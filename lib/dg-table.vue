@@ -59,8 +59,7 @@
           :key="index"
           :width="item.width">
           <template
-            slot="header"
-            slot-scope="scope">
+            slot="header">
             <template v-if="item.filterConfig && item.filterConfig.type">
               <span
                 @click='headerClick'
