@@ -1,210 +1,109 @@
 <template>
   <div id="app">
     <dg-table
-      :data='data'
-      :selection="true"
-      :pagination="true"
-      :page-config="{ pagenum:pagenum, curpage: curpage }"
-      :filter-init="[]"
-      :row-click="onclick"
-      :action-config="activeConfig"
-      :column-config="config"
-      @filter-change='getFilter'
-      @select-change="getselect"
-      @page-change="getpage"></dg-table>
+      :data="tableData"
+      :configs="configs"
+      :row-class-name="tableRowClassName"
+    ></dg-table>
+    <!-- <el-date-picker
+      v-model="value1"
+      type="date"
+      placeholder="选择日期">
+    </el-date-picker> -->
   </div>
 </template>
 
 <script>
-// import DgTable from './lib/dg-table.vue'
-import cc from './components/columcomponent.vue'
-import CF from './components/customizefilter.vue'
-import {
-  searchdata,
-  dofilter,
-  cities,
-  createTableDataByRandom
-} from './assets/js/simulationapi.js'
+import Test from './components/HelloWorld'
 export default {
-  name: 'app',
-  methods: {
-    getpage (page) {
-      this.curpage = page
-      let allfilter = {
-        filters: this.filters,
-        page
-      }
-      let res = dofilter(allfilter)
-      this.data = res.data
-    },
-    getFilter (val) {
-      let allfilter = {
-        filters: val,
-        page: 1
-      }
-      this.filters = val
-      let res = dofilter(allfilter)
-      this.data = res.data
-      this.pagenum = res.pagenum
-    },
-    getselect (val) {
-      console.log(val)
-    }
-  },
-  mounted () {
-    let res = createTableDataByRandom(587)
-    this.data = res.data
-    this.pagenum = res.pagenum
-    // tabledata().then(res => {
-    //   this.dgTable.data = res
-    // })
-  },
-  data () {
+  name: "app",
+  components: {},
+  data() {
     return {
-      filters: 3,
-      // curpage: 1,
-      select: true,
-      pagination: true,
-      pagenum: 1,
-      curpage: 1,
-      // filters: {
-      //   uid: {
-      //     label: '天才',
-      //     key: 'uid',
-      //     value: 'uid_x89dj9vecx',
-      //     fn: '姓名'
-      //   }
-      // },
-      onclick: (row) => {
-        // console.log('onclick colum :', row)
-        alert(JSON.stringify(row))
-      },
-      activeConfig: {
-        type: 'button',
-        label: '获取',
-        handler: (scope) => {
-          alert(JSON.stringify(scope.row))
-        },
-        width: '100'
-      },
-      config: [
+      value1: '',
+      tableData: [
         {
-          prop: 'name',
-          label: '姓名',
-          width: '80',
-          filterConfig: {
-            ftn: '姓名',
-            type: 'search',
-            key: 'uid',
-            placeholder: '输入姓名',
-            listinfo: {
-              handler: searchdata,
-              searchkey: 'name', // 用于搜索api对应的key
-              showkey: 'name' // 在列表中要显示的字段
-            }
-          }
-        }, {
-          prop: 'gender',
-          label: '性别',
-          component: cc,
-          width: '80',
-          filterConfig: {
-            ftn: '性别',
-            type: 'radio',
-            key: 'gender',
-            listinfo: {
-              // handler: radiodata,
-              labelkey: 'label',
-              valuekey: 'value'
-            },
-            items: [
-              { label: '男', value: 1 },
-              { label: '女', value: 2 }
-            ]
-          }
-        }, {
-          prop: 'birthPlace',
-          label: '出生地',
-          processdata: (row, prop) => {
-            // console.log('process data:', row) // 返回整行 便于 处理一些依赖其他列的数据
-            var space = ''
-            if (!row.birthPlace) return '-'
-            var curobj = row.birthPlace
-            while (1) {
-              if (curobj) {
-                space += curobj.name
-                curobj = curobj.child
-              } else {
-                break
-              }
-            }
-            return space
-          }, // 数据的处理 默认提供一些 也可以自定义处理数据的函数
-          filterConfig: {
-            ftn: '出生地',
-            key: 'birthPlace',
-            type: 'cascader',
-            hidebg: true,
-            props: {
-              value: 'code',
-              label: 'name',
-              children: 'children'
-            },
-            items: cities()
-          }
-        }, {
-          prop: 'birthDay',
-          label: '出生日期',
-          filterConfig: {
-            ftn: '生日',
-            hidebg: true,
-            type: 'date',
-            key: 'birthDay'
-          },
-          processdata: 'time'
-        }, {
-          prop: 'phone',
-          label: '手机号',
-          filterConfig: {
-            ftn: '手机',
-            type: 'edit',
-            key: 'phone'
-          }
-        }, {
-          prop: 'age',
-          label: '年龄',
-          filterConfig: {
-            ftn: '年龄',
-            type: 'range',
-            key: 'age',
-            unit: '岁'
-          }
-        }, {
-          prop: 'age2',
-          label: '年龄',
-          filterConfig: {
-            ftn: '年龄',
-            type: 'range',
-            key: 'age',
-            unit: '岁'
-          }
-        }, {
-          prop: 'age',
-          label: '测试列',
-          filterConfig: {
-            ftn: '年龄',
-            type: 'customize',
-            component: CF,
-            key: 'age',
-            unit: '岁'
-          }
+          date: "2016-05-02",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1517 弄"
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄"
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄"
         }
       ],
-      data: []
+      search: "",
+      configs: [
+        {
+          columnConfig: {
+            prop: "address",
+            label: "地址"
+          },
+          filterConfig: {
+            type: 'test'
+          }
+        },
+        {
+          columnConfig: {
+            prop: "name",
+            label: "姓名"
+          },
+          component: Test,
+          filterConfig: {
+            type: 'test'
+          }
+        },
+        {
+          columnConfig: {
+            prop: "date",
+            label: "时间"
+          },
+          filterConfig: {
+            type: 'date'
+          }
+        }
+      ]
+    };
+  },
+  methods: {
+    rclick (row) {
+      alert(JSON.stringify(row))
+    },
+    tableRowClassName({rowIndex}) {
+      if (rowIndex === 1) {
+        return 'warning-row';
+      } else if (rowIndex === 3) {
+        return 'success-row';
+      }
+      return '';
     }
   }
-}
+};
 </script>
 
 <style>
+body{
+  padding-top: 1px;
+}
+#app {
+  margin-top: 60px;
+}
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}
 </style>

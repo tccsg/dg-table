@@ -1,4 +1,11 @@
-.filterWrap {
+.dg-filters_hidden-wrap {
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.dg-table_filter-wrap {
   min-width: 100px;
   border: 1px solid #ebeef5;
   border-radius: 2px;
@@ -8,23 +15,26 @@
   margin: 2px 0;
   position: absolute;
   z-index: 9;
+  display: none;
+  overflow: hidden;
 }
 .editFilter {
   position: absolute;
   width: 300px;
 }
-.filterWrap.hideBg {
+.dg-table_filter-wrap.dg-table_filter-hideBg {
   opacity:0;
+  /* padding: 10px; */
   box-shadow:none;
 }
 /* .filterWrap .filterContainer {
   padding: 10px;
 } */
-.filterWrap .filterBottom {
+.dg-table_filter-wrap .filterBottom {
   padding: 8px;
   border-top: 1px solid #ebeef5;
 }
-.filterWrap .filterBottom button {
+.dg-table_filter-wrap .filterBottom button {
   background: transparent;
   border: none;
   color: #606266;
@@ -32,7 +42,7 @@
   font-size: 13px;
   padding: 0 3px;
 }
-.filterWrap .filterBottom button.is-disabled {
+.dg-table_filter-wrap .filterBottom button.is-disabled {
   color: #c0c4cc;
   cursor: not-allowed;
 }
