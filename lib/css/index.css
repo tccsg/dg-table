@@ -18,31 +18,8 @@
   display: none;
   overflow: hidden;
 }
-.editFilter {
-  position: absolute;
-  width: 300px;
-}
 .dg-table_filter-wrap.dg-table_filter-hideBg {
   opacity:0;
   /* padding: 10px; */
   box-shadow:none;
-}
-/* .filterWrap .filterContainer {
-  padding: 10px;
-} */
-.dg-table_filter-wrap .filterBottom {
-  padding: 8px;
-  border-top: 1px solid #ebeef5;
-}
-.dg-table_filter-wrap .filterBottom button {
-  background: transparent;
-  border: none;
-  color: #606266;
-  cursor: pointer;
-  font-size: 13px;
-  padding: 0 3px;
-}
-.dg-table_filter-wrap .filterBottom button.is-disabled {
-  color: #c0c4cc;
-  cursor: not-allowed;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    {{row['name']}}
+    {{getPlace(row, 'birthPlace')}}
   </div>
 </template>
 
@@ -12,6 +12,22 @@ export default {
   },
   mounted() {
     // console.log(this.row)
+  },
+  methods: {
+    getPlace (row) {
+       var space = ''
+        if (!row.birthPlace) return '-'
+        var curobj = row.birthPlace
+        while (curobj) {
+          if (curobj) {
+            space += curobj.name
+            curobj = curobj.child
+          } else {
+            break
+          }
+        }
+        return space
+    }
   }
 }
 </script>

@@ -68,16 +68,12 @@ export default {
   },
   methods: {
     changeData (val) {
-      const { refname = '' } = this.config || {}
-      this.$refs[refname].blur()
+      const { key } = this.config || {}
 
       this.$emit('__DGTABLE_GET_FILTER_DATA__', {
         type: 'date',
-        key: this.filterkey,
-        label: val[0] + ' , ' + val[1],
-        value: { gt: val[0], lt: val[1] },
-        ftn: this.ftn,
-        date: { gt: val[0], lt: val[1] }
+        key,
+        value: val
       })
     }
   }

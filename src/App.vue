@@ -1,92 +1,115 @@
 <template>
   <div id="app">
     <dg-table
-      :data="tableData"
       :configs="configs"
-      :row-class-name="tableRowClassName"
+      tableId='account'
+      
+      :data="tableData"
+      @row-click='rowClick'
+      @filter-change="filterChange"
+      @selection-change="handleSelectionChange"
     ></dg-table>
-    <!-- <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="选择日期">
-    </el-date-picker> -->
   </div>
 </template>
 
 <script>
 import Test from './components/HelloWorld'
+import Gender from './components/Gender'
+import MyDatePicker from './components/MyDatePicker'
+import MyCascader from './components/MyCascader'
+import MyInput from './components/myFilter/MyInput'
+import {
+  createTableDataByRandom
+} from './assets/js/simulationapi.js'
 export default {
   name: "app",
   components: {},
+  mounted() {
+    const res = createTableDataByRandom(203)
+    this.tableData = res.data
+  },
   data() {
     return {
       value1: '',
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
+      tableData: [],
       search: "",
       configs: [
         {
           columnConfig: {
-            prop: "address",
-            label: "地址"
-          },
-          filterConfig: {
-            type: 'test'
+            type: 'selection',
+            wdith: '55'
           }
         },
         {
           columnConfig: {
             prop: "name",
             label: "姓名"
-          },
-          component: Test,
-          filterConfig: {
-            type: 'test'
           }
         },
         {
           columnConfig: {
-            prop: "date",
-            label: "时间"
+            prop: "gender",
+            label: "性别",
+            filters: [
+              {text: '男', value: '1'},
+              {text: '女', value: '2'}
+            ],
+            filterMethod: (value, row, column) => {
+              const property = column['property'];
+              return row[property] === value;
+            }
+          },
+          component: Gender,
+        },
+        {
+          columnConfig: {
+            prop: "birthPlace",
+            label: "出生地"
+          },
+          component: Test,
+          filterConfig: {
+            type: 'cascader',
+            component: MyCascader
+          }
+        },
+        {
+          columnConfig: {
+            prop: "birthDay",
+            label: "出生日期"
           },
           filterConfig: {
-            type: 'date'
+            type: 'date',
+            component: MyDatePicker
+          }
+        },
+        {
+          columnConfig: {
+            prop: "phone",
+            label: "手机号"
+          },
+          filterConfig: {
+            type: 'customize',
+            component: MyInput
+          }
+        },
+        {
+          columnConfig: {
+            prop: "age",
+            label: "年龄"
           }
         }
       ]
     };
   },
   methods: {
-    rclick (row) {
-      alert(JSON.stringify(row))
+    rowClick (row, column) {
+      console.log(row, column)
     },
-    tableRowClassName({rowIndex}) {
-      if (rowIndex === 1) {
-        return 'warning-row';
-      } else if (rowIndex === 3) {
-        return 'success-row';
-      }
-      return '';
+    filterChange (res) {
+      console.log(res)
+    },
+    handleSelectionChange(val) {
+      console.log(val)
     }
   }
 };
@@ -97,7 +120,7 @@ body{
   padding-top: 1px;
 }
 #app {
-  margin-top: 60px;
+  margin-top: 80px;
 }
 .el-table .warning-row {
   background: oldlace;
