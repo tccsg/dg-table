@@ -1,0 +1,25 @@
+.dg-filters_hidden-wrap {
+  height: 0;
+  width: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.dg-table_filter-wrap {
+  min-width: 100px;
+  border: 1px solid #ebeef5;
+  border-radius: 2px;
+  background-color: #fff;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin: 2px 0;
+  position: absolute;
+  z-index: 9;
+  display: none;
+  overflow: hidden;
+}
+.dg-table_filter-wrap.dg-table_filter-hideBg {
+  opacity:0;
+  /* padding: 10px; */
+  box-shadow:none;
+}

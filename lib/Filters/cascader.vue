@@ -3,12 +3,11 @@
     ref='cascaderfilter'>
     <el-cascader
       style="width:0;height:0;padding:0;top:-10px"
-      :options="data"
-      :ref="refname"
-      expand-trigger="hover"
+      :options="config.data"
+      :ref="config.refname"
       v-model="selectedOptions"
       @change="handleChange"
-      :props="myprops">
+      :props="config.myprops">
     </el-cascader>
   </div>
 </template>
@@ -16,36 +15,7 @@
 <script>
 import Bus from '../js/Bus.js'
 export default {
-  props: {
-    ftn: {
-      type: String,
-      default: ''
-    },
-    data: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    },
-    refname: {
-      type: String,
-      default: ''
-    },
-    filterkey: {
-      type: String,
-      default: ''
-    },
-    myprops: {
-      type: Object,
-      default: function () {
-        return {
-          value: 'value',
-          label: 'label',
-          children: 'children'
-        }
-      }
-    }
-  },
+  props: ['config'],
   data () {
     return {
       selectedOptions: [],
@@ -55,11 +25,11 @@ export default {
   },
   methods: {
     handleChange (value) {
-      let label = this.getLabel(value, this.data)
+      const { key } = this.config || {}
+      let label = this.getLabel(value, this.config.data)
       setTimeout(() => {
-        this.$emit('getFilterBridge', {
-          ftn: this.ftn,
-          key: this.filterkey,
+        this.$emit('__DGTABLE_GET_FILTER_DATA__', {
+          key,
           label: label,
           value: value[value.length - 1],
           type: 'cascader'
@@ -70,32 +40,28 @@ export default {
       let _value = JSON.parse(JSON.stringify(value))
       let labelstr = ''
       let val = value[0]
+      const { config } = this
       for (let i = 0; i < d.length; i++) {
-        if (d[i][this.myprops.value] === val) {
-          if (d[i] && d[i][this.myprops.children]) {
+        if (d[i][config.myprops.value] === val) {
+          if (d[i] && d[i][config.myprops.children]) {
             _value.splice(0, 1)
-            labelstr += this.getLabel(_value, d[i][this.myprops.children])
-            return d[i][this.myprops.label] + labelstr
+            labelstr += this.getLabel(_value, d[i][config.myprops.children])
+            return d[i][config.myprops.label] + labelstr
           } else {
-            return d[i][this.myprops.label]
+            return d[i][config.myprops.label]
           }
         }
       }
     }
   },
   mounted () {
-    Bus.$on('OPEN_DGTABLE_CASCADER_FILTER', refname => {
-      if (this.options && this.refname === refname && this.$refs[refname]) {
-        this.$refs[refname].handleClick()
+    const { refname = '' } = this.config || {}
+    Bus.$on('__OPEN_DGTABLE_CASCADER_FILTER__', fid => {
+      if (refname === fid && this.$refs[fid]) {
+        this.$refs[fid].handleInput()
       }
     })
   }
 }
 </script>
 
-<style scoped>
-@import '../css/common.css';
-.editFilter {
-  position: absolute;
-}
-</style>

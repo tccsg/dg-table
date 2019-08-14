@@ -4,9 +4,9 @@
       v-model="filterdate"
       type="daterange"
       align="right"
-      style="height:0;padding:0;top:-10px"
+      style="height:0;padding:0;top:-15px"
       unlink-panels
-      :ref="refname"
+      :ref="config.refname"
       @change="changeData"
       range-separator=""
       start-placeholder=""
@@ -21,20 +21,7 @@
 <script>
 import Bus from '../js/Bus.js'
 export default {
-  props: {
-    refname: {
-      type: String,
-      default: ''
-    },
-    filterkey: {
-      type: String,
-      default: ''
-    },
-    ftn: {
-      type: String,
-      default: ''
-    }
-  },
+  props: ['config'],
   data () {
     return {
       filterdate: '',
@@ -72,27 +59,23 @@ export default {
     }
   },
   mounted () {
-    Bus.$on('OPEN_DGTABLE_DATE_FILTER', refname => {
-      if (this.$refs[refname]) {
-        if (this.refname === refname) this.$refs[refname].focus()
+    const { refname = '' } = this.config || {}
+    Bus.$on('__OPEN_DGTABLE_DATE_FILTER__', fid => {
+      if (this.$refs[fid]) {
+        if (refname === fid) this.$refs[fid].focus()
       }
     })
   },
   methods: {
     changeData (val) {
-      this.$emit('getFilterBridge', {
+      const { key } = this.config || {}
+
+      this.$emit('__DGTABLE_GET_FILTER_DATA__', {
         type: 'date',
-        key: this.filterkey,
-        label: val[0] + ' , ' + val[1],
-        value: { gt: val[0], lt: val[1] },
-        ftn: this.ftn,
-        date: { gt: val[0], lt: val[1] }
+        key,
+        value: val
       })
     }
   }
 }
 </script>
-
-<style scoped>
-@import '../css/common.css';
-</style>

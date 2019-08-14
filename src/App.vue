@@ -1,222 +1,132 @@
 <template>
   <div id="app">
-    <!-- <dg-table
-      :data='data'
-      :selection="true"
-      :pagination="true"
-      :page-config="{ pagenum:pagenum, curpage: curpage }"
-      :filter-init="[]"
-      :row-click="onclick"
-      :action-config="activeConfig"
-      :column-config="config"
-      :et-attributes="el_attributes"
-      @filter-change='getFilter'
-      @select-change="getselect"
-      @page-change="getpage"></dg-table> -->
-      <dgtag>lala</dgtag>
-      <component :is="etg">lala</component>
+    <dg-table
+      :configs="configs"
+      tableId='account'
+      
+      :data="tableData"
+      @row-click='rowClick'
+      @filter-change="filterChange"
+      @selection-change="handleSelectionChange"
+    ></dg-table>
   </div>
 </template>
 
 <script>
-// import DgTable from './lib/dg-table.vue'
-import cc from './components/columcomponent.vue'
-import CF from './components/customizefilter.vue'
-import Vue from 'vue'
+import Test from './components/HelloWorld'
+import Gender from './components/Gender'
+import MyDatePicker from './components/MyDatePicker'
+import MyCascader from './components/MyCascader'
+import MyInput from './components/myFilter/MyInput'
 import {
-  searchdata,
-  dofilter,
-  cities,
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
 export default {
-  name: 'app',
-  methods: {
-    getpage (page) {
-      this.curpage = page
-      let allfilter = {
-        filters: this.filters,
-        page
-      }
-      let res = dofilter(allfilter)
-      this.data = res.data
-    },
-    getFilter (val) {
-      let allfilter = {
-        filters: val,
-        page: 1
-      }
-      this.filters = val
-      let res = dofilter(allfilter)
-      this.data = res.data
-      this.pagenum = res.pagenum
-    },
-    getselect (val) {
-      console.log(val)
-    }
+  name: "app",
+  components: {},
+  mounted() {
+    const res = createTableDataByRandom(203)
+    this.tableData = res.data
   },
-  mounted () {
-    let res = createTableDataByRandom(587)
-    this.data = res.data
-    this.pagenum = res.pagenum
-
-    const Etag = Vue.component('ElTagtre')
-    // const etag = new Etag()
-    this.etg = Etag
-    // tabledata().then(res => {
-    //   this.dgTable.data = res
-    // })
-  },
-  data () {
+  data() {
     return {
-      etg: null,
-      el_attributes: {
-        border: true
-      },
-      filters: 3,
-      // curpage: 1,
-      select: true,
-      pagination: true,
-      pagenum: 1,
-      curpage: 1,
-      // filters: {
-      //   uid: {
-      //     label: '天才',
-      //     key: 'uid',
-      //     value: 'uid_x89dj9vecx',
-      //     fn: '姓名'
-      //   }
-      // },
-      onclick: (row) => {
-        // console.log('onclick colum :', row)
-        alert(JSON.stringify(row))
-      },
-      activeConfig: {
-        type: 'button',
-        label: '获取',
-        handler: (scope) => {
-          alert(JSON.stringify(scope.row))
-        },
-        width: '100'
-      },
-      config: [
+      value1: '',
+      tableData: [],
+      search: "",
+      configs: [
         {
-          prop: 'name',
-          label: '姓名',
-          width: '80',
-          filterConfig: {
-            ftn: '姓名',
-            type: 'search',
-            key: 'uid',
-            placeholder: '输入姓名',
-            listinfo: {
-              handler: searchdata,
-              searchkey: 'name', // 用于搜索api对应的key
-              showkey: 'name' // 在列表中要显示的字段
+          columnConfig: {
+            type: 'selection',
+            wdith: '55'
+          }
+        },
+        {
+          columnConfig: {
+            prop: "name",
+            label: "姓名"
+          }
+        },
+        {
+          columnConfig: {
+            prop: "gender",
+            label: "性别",
+            filters: [
+              {text: '男', value: '1'},
+              {text: '女', value: '2'}
+            ],
+            filterMethod: (value, row, column) => {
+              const property = column['property'];
+              return row[property] === value;
             }
-          }
-        }, {
-          prop: 'gender',
-          label: '性别',
-          component: cc,
-          width: '80',
-          filterConfig: {
-            ftn: '性别',
-            type: 'radio',
-            key: 'gender',
-            listinfo: {
-              // handler: radiodata,
-              labelkey: 'label',
-              valuekey: 'value'
-            },
-            items: [
-              { label: '男', value: 1 },
-              { label: '女', value: 2 }
-            ]
-          }
-        }, {
-          prop: 'birthPlace',
-          label: '出生地',
-          processdata: (row, prop) => {
-            // console.log('process data:', row) // 返回整行 便于 处理一些依赖其他列的数据
-            var space = ''
-            if (!row.birthPlace) return '-'
-            var curobj = row.birthPlace
-            while (1) {
-              if (curobj) {
-                space += curobj.name
-                curobj = curobj.child
-              } else {
-                break
-              }
-            }
-            return space
-          }, // 数据的处理 默认提供一些 也可以自定义处理数据的函数
-          filterConfig: {
-            ftn: '出生地',
-            key: 'birthPlace',
-            type: 'cascader',
-            hidebg: true,
-            props: {
-              value: 'code',
-              label: 'name',
-              children: 'children'
-            },
-            items: cities()
-          }
-        }, {
-          prop: 'birthDay',
-          label: '出生日期',
-          filterConfig: {
-            ftn: '生日',
-            hidebg: true,
-            type: 'date',
-            key: 'birthDay'
           },
-          processdata: 'time'
-        }, {
-          prop: 'phone',
-          label: '手机号',
+          component: Gender,
+        },
+        {
+          columnConfig: {
+            prop: "birthPlace",
+            label: "出生地"
+          },
+          component: Test,
           filterConfig: {
-            ftn: '手机',
-            type: 'edit',
-            key: 'phone'
+            type: 'cascader',
+            component: MyCascader
           }
-        }, {
-          prop: 'age',
-          label: '年龄',
+        },
+        {
+          columnConfig: {
+            prop: "birthDay",
+            label: "出生日期"
+          },
           filterConfig: {
-            ftn: '年龄',
-            type: 'range',
-            key: 'age',
-            unit: '岁'
+            type: 'date',
+            component: MyDatePicker
           }
-        }, {
-          prop: 'age2',
-          label: '年龄',
+        },
+        {
+          columnConfig: {
+            prop: "phone",
+            label: "手机号"
+          },
           filterConfig: {
-            ftn: '年龄',
-            type: 'range',
-            key: 'age',
-            unit: '岁'
-          }
-        }, {
-          prop: 'age',
-          label: '测试列',
-          filterConfig: {
-            ftn: '年龄',
             type: 'customize',
-            component: CF,
-            key: 'age',
-            unit: '岁'
+            component: MyInput
+          }
+        },
+        {
+          columnConfig: {
+            prop: "age",
+            label: "年龄"
           }
         }
-      ],
-      data: []
+      ]
+    };
+  },
+  methods: {
+    rowClick (row, column) {
+      console.log(row, column)
+    },
+    filterChange (res) {
+      console.log(res)
+    },
+    handleSelectionChange(val) {
+      console.log(val)
     }
   }
-}
+};
 </script>
 
 <style>
+body{
+  padding-top: 1px;
+}
+#app {
+  margin-top: 80px;
+}
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}
 </style>
