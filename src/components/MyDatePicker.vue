@@ -13,7 +13,10 @@
 
 <script>
 export default {
-  props:['config']
+  props:['config'],
+  mounted() {
+    // console.log(this.config)
+  }
 }
 </script>
 

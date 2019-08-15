@@ -84,6 +84,15 @@ export default {
             component: MyDatePicker
           }
         },
+         {
+          columnConfig: {
+            prop: "time",
+            label: "时间"
+          },
+          filterConfig: {
+            type: 'date'
+          }
+        },
         {
           columnConfig: {
             prop: "phone",
