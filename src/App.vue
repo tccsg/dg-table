@@ -3,11 +3,12 @@
     <dg-table
       :configs="configs"
       tableId='account'
-      
+      @filter-change="filterChange"
+
       :data="tableData"
       @row-click='rowClick'
-      @filter-change="filterChange"
       @selection-change="handleSelectionChange"
+      stripe
     ></dg-table>
   </div>
 </template>
@@ -18,6 +19,7 @@ import Gender from './components/Gender'
 import MyDatePicker from './components/MyDatePicker'
 import MyCascader from './components/MyCascader'
 import MyInput from './components/myFilter/MyInput'
+import MyInput2 from './components/myFilter/MyInput2'
 import {
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
@@ -88,7 +90,7 @@ export default {
             label: "手机号"
           },
           filterConfig: {
-            type: 'customize',
+            type: 'custom',
             component: MyInput
           }
         },
@@ -96,6 +98,10 @@ export default {
           columnConfig: {
             prop: "age",
             label: "年龄"
+          },
+          filterConfig: {
+            type: 'custom',
+            component: MyInput2
           }
         }
       ]

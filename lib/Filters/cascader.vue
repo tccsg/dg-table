@@ -30,8 +30,10 @@ export default {
       setTimeout(() => {
         this.$emit('__DGTABLE_GET_FILTER_DATA__', {
           key,
-          label: label,
-          value: value[value.length - 1],
+          res: {
+            value: value[value.length - 1],
+            label
+          },
           type: 'cascader'
         })
       }, 0)

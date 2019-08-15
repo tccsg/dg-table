@@ -22,7 +22,7 @@ export default {
     confirm () {
       const { key } = this.config || {}
       this.$emit('__DGTABLE_GET_FILTER_DATA__', {
-        type: 'customize',
+        type: 'custom',
         key,
         value: this.val
       })

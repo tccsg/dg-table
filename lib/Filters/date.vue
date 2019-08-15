@@ -73,7 +73,9 @@ export default {
       this.$emit('__DGTABLE_GET_FILTER_DATA__', {
         type: 'date',
         key,
-        value: val
+        res: {
+          value: val
+        }
       })
     }
   }
