@@ -22,3 +22,7 @@ Vue.use(DgTable)
 ## Browser Suppor
 Modern browsers and Internet Explorer 10+.
 
+## [文档地址](https://www.jianshu.com/p/7ad1e0aafc92)
+
+## [demo地址](https://github.com/tccsg/dg-table-demo)
+
