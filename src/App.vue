@@ -48,18 +48,47 @@ export default {
         },
         {
           columnConfig: {
-            prop: "gender",
-            label: "性别",
-            filters: [
-              {text: '男', value: '1'},
-              {text: '女', value: '2'}
-            ],
-            filterMethod: (value, row, column) => {
-              const property = column['property'];
-              return row[property] === value;
-            }
+            label: "性别信息",
+            // filters: [
+            //   {text: '男', value: '1'},
+            //   {text: '女', value: '2'}
+            // ],
+            // filterMethod: (value, row, column) => {
+            //   const property = column['property'];
+            //   return row[property] === value;
+            // }
           },
-          component: Gender,
+          children: [
+            {
+              columnConfig: {
+                prop: "gender",
+                label: "性别",
+                filters: [
+                  {text: '男', value: '1'},
+                  {text: '女', value: '2'}
+                ],
+                filterMethod: (value, row, column) => {
+                  const property = column['property'];
+                  return row[property] === value;
+                }
+              },
+              component: Gender,
+            },
+            {
+              columnConfig: {
+                prop: "gender",
+                label: "性别值",
+                filters: [
+                  {text: '1', value: '1'},
+                  {text: '2', value: '2'}
+                ],
+                filterMethod: (value, row, column) => {
+                  const property = column['property'];
+                  return row[property] === value;
+                }
+              },
+            },
+          ],
         },
         {
           columnConfig: {
