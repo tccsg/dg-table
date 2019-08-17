@@ -77,7 +77,8 @@ export default {
         {
           columnConfig: {
             prop: "birthDay",
-            label: "出生日期"
+            label: "出生日期",
+            fixed: true
           },
           filterConfig: {
             type: 'date',

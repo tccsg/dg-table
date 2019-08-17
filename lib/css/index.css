@@ -18,6 +18,9 @@
   display: none;
   overflow: hidden;
 }
+.customize_filter.active i{
+  transform: rotate(-180deg)
+}
 .dg-table_filter-wrap.dg-table_filter-hideBg {
   opacity:0;
   /* padding: 10px; */
