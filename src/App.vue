@@ -8,12 +8,10 @@
       :data="tableData"
       @row-click='rowClick'
       @selection-change="handleSelectionChange"
-      stripe
     ></dg-table>
     <Test2 :filters="filters"></Test2>
     <div>
       <div>
-        {{selects}}
       </div>
       <div>
         <div v-for="(val, key, index) in filters" :key="index">
@@ -143,7 +141,7 @@ export default {
     },
     handleSelectionChange(val) {
       this.selects = val
-      console.log(val)
+      console.log(this.selects)
     }
   }
 };
