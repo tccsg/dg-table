@@ -10,6 +10,17 @@
       @selection-change="handleSelectionChange"
       stripe
     ></dg-table>
+    <Test2 :filters="filters"></Test2>
+    <div>
+      <div>
+        {{selects}}
+      </div>
+      <div>
+        <div v-for="(val, key, index) in filters" :key="index">
+          <div><span>{{key}}：</span><span>{{val}}</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,18 +31,23 @@ import MyDatePicker from './components/MyDatePicker'
 import MyCascader from './components/MyCascader'
 import MyInput from './components/myFilter/MyInput'
 import MyInput2 from './components/myFilter/MyInput2'
+import Test2 from './components/test'
 import {
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
 export default {
   name: "app",
-  components: {},
+  components: {
+    Test2
+  },
   mounted() {
     const res = createTableDataByRandom(203)
     this.tableData = res.data
   },
   data() {
     return {
+      selects: [],
+      filters: {},
       value1: '',
       tableData: [],
       search: "",
@@ -121,10 +137,12 @@ export default {
     rowClick (row, column) {
       console.log(row, column)
     },
-    filterChange (res) {
-      console.log(res)
+    filterChange (d) {
+      this.$set(this.filters, d.key, d.res.value)
+      console.log(d)
     },
     handleSelectionChange(val) {
+      this.selects = val
       console.log(val)
     }
   }
