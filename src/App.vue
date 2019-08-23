@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <EltableTest></EltableTest>
     <dg-table
       :configs="configs"
       tableId='account'
@@ -8,12 +9,10 @@
       :data="tableData"
       @row-click='rowClick'
       @selection-change="handleSelectionChange"
-      stripe
     ></dg-table>
-    <Test2 :filters="filters"></Test2>
     <div>
       <div>
-        {{selects}}
+        {{selects.length}}
       </div>
       <div>
         <div v-for="(val, key, index) in filters" :key="index">
@@ -31,14 +30,15 @@ import MyDatePicker from './components/MyDatePicker'
 import MyCascader from './components/MyCascader'
 import MyInput from './components/myFilter/MyInput'
 import MyInput2 from './components/myFilter/MyInput2'
-import Test2 from './components/test'
+
+import EltableTest from './components/eltable'
 import {
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
 export default {
   name: "app",
   components: {
-    Test2
+    EltableTest
   },
   mounted() {
     const res = createTableDataByRandom(203)
@@ -143,7 +143,7 @@ export default {
     },
     handleSelectionChange(val) {
       this.selects = val
-      console.log(val)
+      console.log(this.selects)
     }
   }
 };
