@@ -1,9 +1,11 @@
+
+<script>
 import DgTableHeader from './components/table-header'
 import DgTableDateFilter from './filters/date'
 import DgTableCascader from './filters/cascader'
 import Bus from './js/Bus'
 import { Dom } from './js/utils'
-
+import ElTable from 'element-ui/lib/table'
 
 // 私有函数的集合 相当于注册函数
 const privateHandlers = [
@@ -53,9 +55,9 @@ const normalizeProps = (context) => {
     }
   }
   delete props.configs
-  const on = context.$listeners
+  const on = context._events
   const scopedSlots = context.$scopedSlots
-  const attrs = context.$attrs
+  const attrs = {}
 
 
   let privateOn = Object.create(null)
@@ -185,29 +187,29 @@ const hideAllFilter = (e, UNID) => {
     }
   }
 }
+
 export default {
-  props: {
+  props: Object.assign({}, {
     configs: Array,
-    data: Array,
     tableId: String
-  },
+  }, ElTable.props),
   name: 'dg-table',
   functional: false,
-  inheritAttrs: false,
   methods: {},
+  beforeUpdate () {
+    // console.log('dg-table update')
+  },
   render (h) {
     const UNID = this.tableId || 'DGTABLE'
-    const { on,
+    const {
+      on,
       scopedSlots,
-      attrs,
       props,
-      privateOn } = normalizeProps(this)
-    
-    // const props = JSON.parse(JSON.stringify(this))
-    const configs = this.configs || []
+      privateOn } = normalizeProps(this._self)
+    const configs = this.configs ||  []
     let filterVnodes = []
     // 渲染列
-    const renderColumn = configs.map((item, index) => {
+    const renderColumn = configs => configs.map((item, index) => {
       const columnConfig = item.columnConfig || {}
       const filterConfig = item.filterConfig || null
       const component = item.component || null
@@ -261,21 +263,20 @@ export default {
           ) : null,
         ])
     })
-
+    // return h('div', ['dd'])
     return h('div', {
       attrs: {
         id: `__${UNID}_DGTABLE__`
       }
     }, [
       h(
-        'el-table',
+        ElTable,
         {
           props: props,
           on,
-          scopedSlots,
-          attrs
+          scopedSlots
         },
-        renderColumn
+        renderColumn(configs)
       ),
       h('div', {
         'class': 'dg-filters_hidden-wrap',
@@ -291,4 +292,6 @@ export default {
     ])
   }
 }
+</script>
+
 

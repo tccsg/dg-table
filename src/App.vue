@@ -9,9 +9,9 @@
       @row-click='rowClick'
       @selection-change="handleSelectionChange"
     ></dg-table>
-    <Test2 :filters="filters"></Test2>
     <div>
       <div>
+        {{selects.length}}
       </div>
       <div>
         <div v-for="(val, key, index) in filters" :key="index">
@@ -29,14 +29,13 @@ import MyDatePicker from './components/MyDatePicker'
 import MyCascader from './components/MyCascader'
 import MyInput from './components/myFilter/MyInput'
 import MyInput2 from './components/myFilter/MyInput2'
-import Test2 from './components/test'
+// import Test2 from './components/eltable'
 import {
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
 export default {
   name: "app",
   components: {
-    Test2
   },
   mounted() {
     const res = createTableDataByRandom(203)
@@ -47,6 +46,7 @@ export default {
       selects: [],
       filters: {},
       value1: '',
+      count: 0,
       tableData: [],
       search: "",
       configs: [
@@ -141,7 +141,9 @@ export default {
     },
     handleSelectionChange(val) {
       this.selects = val
-      console.log(this.selects)
+    },
+    add () {
+      this.count++
     }
   }
 };
