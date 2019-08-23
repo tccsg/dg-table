@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <EltableTest></EltableTest>
     <dg-table
       :configs="configs"
       tableId='account'
@@ -30,15 +29,13 @@ import MyDatePicker from './components/MyDatePicker'
 import MyCascader from './components/MyCascader'
 import MyInput from './components/myFilter/MyInput'
 import MyInput2 from './components/myFilter/MyInput2'
-
-import EltableTest from './components/eltable'
+// import Test2 from './components/eltable'
 import {
   createTableDataByRandom
 } from './assets/js/simulationapi.js'
 export default {
   name: "app",
   components: {
-    EltableTest
   },
   mounted() {
     const res = createTableDataByRandom(203)
@@ -49,6 +46,7 @@ export default {
       selects: [],
       filters: {},
       value1: '',
+      count: 0,
       tableData: [],
       search: "",
       configs: [
@@ -143,7 +141,6 @@ export default {
     },
     handleSelectionChange(val) {
       this.selects = val
-      console.log(this.selects)
     }
   }
 };
